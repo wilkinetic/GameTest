@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,9 +49,9 @@
     };
 
     let obstacles = [];
-    let gameSpeed = 2;
+    let gameSpeed = 4; // Increased speed
     let score = 0;
-    const winScore = 10;
+    const winScore = 20; // Win after 20 obstacles
 
     function createObstacle() {
       let height = Math.random() * 80 + 50;
@@ -150,7 +150,8 @@
       requestAnimationFrame(gameLoop);
     }
 
-    setInterval(createObstacle, 2500);
+    // Increase the interval between obstacles
+    setInterval(createObstacle, 3000); // Obstacles appear every 3 seconds now
 
     window.addEventListener("keydown", (e) => {
       if (e.code === "Space" || e.code === "ArrowUp") {
@@ -162,3 +163,4 @@
   </script>
 </body>
 </html>
+
