@@ -105,15 +105,15 @@
     function drawCactus(obstacle) {
       // Main body of the cactus
       ctx.fillStyle = obstacle.color;
-      ctx.fillRect(obstacle.x, obstacle.y - obstacle.height, obstacle.width, obstacle.height); // Central vertical part
+      ctx.fillRect(obstacle.x, obstacle.y - 60, 20, 60); // Central vertical part of cactus adjusted higher
       
       // Left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - obstacle.height / 2, 10, obstacle.height / 2); // Vertical part of left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - obstacle.height / 2, 20, 10); // Horizontal part of left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - 40, 10, 20); // Horizontal left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - 60, 10, 20); // Vertical left arm adjusted higher
       
       // Right arm
-      ctx.fillRect(obstacle.x + obstacle.width, obstacle.y - (obstacle.height / 2 + 20), 10, obstacle.height / 2); // Vertical part of right arm
-      ctx.fillRect(obstacle.x + obstacle.width - 10, obstacle.y - (obstacle.height / 2 + 20), 20, 10); // Horizontal part of right arm
+      ctx.fillRect(obstacle.x + 20, obstacle.y - 50, 10, 30); // Horizontal right arm
+      ctx.fillRect(obstacle.x + 20, obstacle.y - 70, 10, 20); // Vertical right arm adjusted higher
     }
 
     function drawPlayer() {
@@ -227,4 +227,3 @@
   </script>
 </body>
 </html>
-
