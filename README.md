@@ -50,7 +50,7 @@
   <canvas id="gameCanvas" width="800" height="400"></canvas>
   <div id="winMessage" class="win-message">
     You Win!
-    <a id="redirectLink" href="#">Click here to proceed</a>
+    <a id="redirectLink" href="#">Click here to rate the game</a>
   </div>
   <div id="gameOverMessage" class="game-over-message">
     Game Over! Press Space to Restart
