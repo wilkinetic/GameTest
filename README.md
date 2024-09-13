@@ -10,7 +10,7 @@
     }
     canvas {
       display: block;
-      background-color: #FFA500; /* Light blue background for visibility */
+      background-color: #e8d7a2; /* Light blue background for visibility */
       border: 2px solid black;
       margin: 0 auto;
     }
