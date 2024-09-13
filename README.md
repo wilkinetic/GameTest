@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Parkour Game</title>
+  <title>Parkour Game with Cat Character</title>
   <style>
     body {
       margin: 0;
@@ -11,7 +11,9 @@
     }
     canvas {
       display: block;
-      background-color: #f0f0f0;
+      background-color: #e0f7fa; /* Light blue background for visibility */
+      border: 2px solid black;
+      margin: 0 auto;
     }
     .win-message {
       position: absolute;
@@ -26,35 +28,35 @@
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas"></canvas>
+  <canvas id="gameCanvas" width="800" height="400"></canvas>
   <div id="winMessage" class="win-message">You Win!</div>
   
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Cat image for player
+    const catImage = new Image();
+    catImage.src = 'https://placekitten.com/50/50'; // Placeholder kitten image, replace with your own URL if needed
 
     let player = {
       x: 50,
       y: canvas.height - 100,
       width: 50,
       height: 50,
-      color: "blue",
       dy: 0,
       gravity: 0.8,
-      jumpPower: -15,
+      jumpPower: -20,
       isJumping: false
     };
 
     let obstacles = [];
-    let gameSpeed = 2; // Slower speed for easier obstacles
+    let gameSpeed = 2;
     let score = 0;
-    const winScore = 10; // Score required to win the game
+    const winScore = 10;
 
     function createObstacle() {
-      let height = Math.random() * 80 + 50; // Random height for obstacles
+      let height = Math.random() * 80 + 50;
       let obstacle = {
         x: canvas.width,
         y: canvas.height - height,
@@ -77,8 +79,8 @@
     }
 
     function drawPlayer() {
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.width, player.height);
+      // Draw the cat image instead of a rectangle for the player
+      ctx.drawImage(catImage, player.x, player.y, player.width, player.height);
     }
 
     function drawObstacles() {
@@ -134,13 +136,13 @@
 
       if (score >= winScore) {
         document.getElementById('winMessage').style.display = 'block';
-        return; // Stop the game loop when player wins
+        return;
       }
 
       requestAnimationFrame(gameLoop);
     }
 
-    setInterval(createObstacle, 2500); // Easier obstacle generation with more space
+    setInterval(createObstacle, 2500);
 
     window.addEventListener("keydown", (e) => {
       if (e.code === "Space" || e.code === "ArrowUp") {
