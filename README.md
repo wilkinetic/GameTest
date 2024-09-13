@@ -10,7 +10,7 @@
     }
     canvas {
       display: block;
-      background-color: #e0f7fa; /* Light blue background for visibility */
+      background-color: #FFA500; /* Light blue background for visibility */
       border: 2px solid black;
       margin: 0 auto;
     }
@@ -212,7 +212,7 @@
     // Redirect to another page when the win link is clicked
     const redirectLink = document.getElementById("redirectLink");
     redirectLink.addEventListener("click", function() {
-      window.location.href = "https://www.example.com"; // Change this to the desired URL
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfpFcSd2nrM-sI3WAGBJHL-IEluDGJpkLuKvpSu9SAotzjrjA/viewform?usp=sf_link"; // Change this to the desired URL
     });
 
     gameLoop();
@@ -220,8 +220,3 @@
 </body>
 </html>
 
-
-    gameLoop();
-  </script>
-</body>
-</html>
