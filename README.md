@@ -13,10 +13,21 @@
       display: block;
       background-color: #f0f0f0;
     }
+    .win-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      font-weight: bold;
+      color: green;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
+  <div id="winMessage" class="win-message">You Win!</div>
   
   <script>
     const canvas = document.getElementById("gameCanvas");
@@ -38,11 +49,12 @@
     };
 
     let obstacles = [];
-    let gameSpeed = 3;
+    let gameSpeed = 2; // Slower speed for easier obstacles
     let score = 0;
+    const winScore = 10; // Score required to win the game
 
     function createObstacle() {
-      let height = Math.random() * 100 + 50;
+      let height = Math.random() * 80 + 50; // Random height for obstacles
       let obstacle = {
         x: canvas.width,
         y: canvas.height - height,
@@ -120,10 +132,15 @@
         document.location.reload();
       }
 
+      if (score >= winScore) {
+        document.getElementById('winMessage').style.display = 'block';
+        return; // Stop the game loop when player wins
+      }
+
       requestAnimationFrame(gameLoop);
     }
 
-    setInterval(createObstacle, 2000);
+    setInterval(createObstacle, 2500); // Easier obstacle generation with more space
 
     window.addEventListener("keydown", (e) => {
       if (e.code === "Space" || e.code === "ArrowUp") {
