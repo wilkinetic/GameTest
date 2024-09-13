@@ -70,7 +70,7 @@
       gravity: 0.8,
       jumpPower: -20, // Negative value to jump upward
       isJumping: false,
-      color: "#f39c12", // Character color
+      color: "#c58c85", // Character color
     };
 
     let obstacles = [];
