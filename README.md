@@ -46,7 +46,7 @@
       height: 50,
       dy: 0,
       gravity: 0.8,
-      jumpPower: -20,
+      jumpPower: 20,
       isJumping: false
     };
 
