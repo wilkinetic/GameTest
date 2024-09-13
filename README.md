@@ -86,7 +86,7 @@
         y: canvas.height - height,
         width: 20,
         height: height,
-        color: "green" // Green for cactus
+        color: "green" // Green for rectangle obstacles
       };
       obstacles.push(obstacle);
     }
@@ -102,18 +102,10 @@
       }
     }
 
-    function drawCactus(obstacle) {
-      // Main body of the cactus
+    function drawRectangle(obstacle) {
+      // Draw green rectangular obstacle
       ctx.fillStyle = obstacle.color;
-      ctx.fillRect(obstacle.x, obstacle.y - 60, 20, 60); // Central vertical part of cactus adjusted higher
-      
-      // Left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - 40, 10, 20); // Horizontal left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - 60, 10, 20); // Vertical left arm adjusted higher
-      
-      // Right arm
-      ctx.fillRect(obstacle.x + 20, obstacle.y - 50, 10, 30); // Horizontal right arm
-      ctx.fillRect(obstacle.x + 20, obstacle.y - 70, 10, 20); // Vertical right arm adjusted higher
+      ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     }
 
     function drawPlayer() {
@@ -133,7 +125,7 @@
 
     function drawObstacles() {
       for (let i = 0; i < obstacles.length; i++) {
-        drawCactus(obstacles[i]); // Draw cactus for each obstacle
+        drawRectangle(obstacles[i]); // Draw rectangle for each obstacle
       }
     }
 
@@ -222,6 +214,12 @@
     redirectLink.addEventListener("click", function() {
       window.location.href = "https://www.example.com"; // Change this to the desired URL
     });
+
+    gameLoop();
+  </script>
+</body>
+</html>
+
 
     gameLoop();
   </script>
