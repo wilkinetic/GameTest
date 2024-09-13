@@ -74,7 +74,7 @@
     };
 
     let obstacles = [];
-    let gameSpeed = 6; // Increased speed for faster gameplay
+    let gameSpeed = 12; // Increased speed for faster gameplay
     let score = 0;
     const winScore = 20; // Win after 20 obstacles
     let gameOver = false;
@@ -105,15 +105,15 @@
     function drawCactus(obstacle) {
       // Main body of the cactus
       ctx.fillStyle = obstacle.color;
-      ctx.fillRect(obstacle.x, obstacle.y - 40, 20, 60); // Central vertical part
+      ctx.fillRect(obstacle.x, obstacle.y - obstacle.height, obstacle.width, obstacle.height); // Central vertical part
       
       // Left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - 20, 10, 30); // Horizontal left arm
-      ctx.fillRect(obstacle.x - 10, obstacle.y - 40, 10, 20); // Vertical part of the left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - obstacle.height / 2, 10, obstacle.height / 2); // Vertical part of left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - obstacle.height / 2, 20, 10); // Horizontal part of left arm
       
       // Right arm
-      ctx.fillRect(obstacle.x + 20, obstacle.y - 30, 10, 40); // Horizontal right arm
-      ctx.fillRect(obstacle.x + 20, obstacle.y - 50, 10, 20); // Vertical part of the right arm
+      ctx.fillRect(obstacle.x + obstacle.width, obstacle.y - (obstacle.height / 2 + 20), 10, obstacle.height / 2); // Vertical part of right arm
+      ctx.fillRect(obstacle.x + obstacle.width - 10, obstacle.y - (obstacle.height / 2 + 20), 20, 10); // Horizontal part of right arm
     }
 
     function drawPlayer() {
@@ -227,3 +227,4 @@
   </script>
 </body>
 </html>
+
