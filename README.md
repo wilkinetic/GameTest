@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,12 +23,24 @@
       font-weight: bold;
       color: green;
       display: none;
+      text-align: center;
+    }
+    .win-message a {
+      display: block;
+      margin-top: 20px;
+      font-size: 30px;
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <canvas id="gameCanvas" width="800" height="400"></canvas>
-  <div id="winMessage" class="win-message">You Win!</div>
+  <div id="winMessage" class="win-message">
+    You Win!
+    <a id="redirectLink" href="#">Click here to proceed</a>
+  </div>
   
   <script>
     const canvas = document.getElementById("gameCanvas");
@@ -159,8 +170,13 @@
       }
     });
 
+    // Redirect to another page when the win link is clicked
+    const redirectLink = document.getElementById("redirectLink");
+    redirectLink.addEventListener("click", function() {
+      window.location.href = "https://www.example.com"; // Change this to the desired URL
+    });
+
     gameLoop();
   </script>
 </body>
 </html>
-
