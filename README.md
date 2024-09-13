@@ -33,6 +33,17 @@
       text-decoration: underline;
       cursor: pointer;
     }
+    .game-over-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      font-weight: bold;
+      color: red;
+      display: none;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -40,6 +51,9 @@
   <div id="winMessage" class="win-message">
     You Win!
     <a id="redirectLink" href="#">Click here to proceed</a>
+  </div>
+  <div id="gameOverMessage" class="game-over-message">
+    Game Over! Press Space to Restart
   </div>
   
   <script>
@@ -60,9 +74,10 @@
     };
 
     let obstacles = [];
-    let gameSpeed = 4; // Increased speed
+    let gameSpeed = 6; // Increased speed for faster gameplay
     let score = 0;
     const winScore = 20; // Win after 20 obstacles
+    let gameOver = false;
 
     function createObstacle() {
       let height = Math.random() * 80 + 50;
@@ -71,7 +86,7 @@
         y: canvas.height - height,
         width: 20,
         height: height,
-        color: "red"
+        color: "green" // Green for cactus
       };
       obstacles.push(obstacle);
     }
@@ -85,6 +100,20 @@
           score++;
         }
       }
+    }
+
+    function drawCactus(obstacle) {
+      // Main body of the cactus
+      ctx.fillStyle = obstacle.color;
+      ctx.fillRect(obstacle.x, obstacle.y - 40, 20, 60); // Central vertical part
+      
+      // Left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - 20, 10, 30); // Horizontal left arm
+      ctx.fillRect(obstacle.x - 10, obstacle.y - 40, 10, 20); // Vertical part of the left arm
+      
+      // Right arm
+      ctx.fillRect(obstacle.x + 20, obstacle.y - 30, 10, 40); // Horizontal right arm
+      ctx.fillRect(obstacle.x + 20, obstacle.y - 50, 10, 20); // Vertical part of the right arm
     }
 
     function drawPlayer() {
@@ -104,8 +133,7 @@
 
     function drawObstacles() {
       for (let i = 0; i < obstacles.length; i++) {
-        ctx.fillStyle = obstacles[i].color;
-        ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacles[i].width, obstacles[i].height);
+        drawCactus(obstacles[i]); // Draw cactus for each obstacle
       }
     }
 
@@ -141,6 +169,8 @@
     }
 
     function gameLoop() {
+      if (gameOver) return; // Stop game if game over
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       drawPlayer();
@@ -149,8 +179,9 @@
       updatePlayer();
 
       if (detectCollision()) {
-        alert(`Game Over! Your score: ${score}`);
-        document.location.reload();
+        gameOver = true;
+        document.getElementById('gameOverMessage').style.display = 'block';
+        return;
       }
 
       if (score >= winScore) {
@@ -161,12 +192,28 @@
       requestAnimationFrame(gameLoop);
     }
 
+    function resetGame() {
+      player.x = 50;
+      player.y = canvas.height - 100;
+      player.dy = 0;
+      player.isJumping = false;
+      obstacles = [];
+      score = 0;
+      gameOver = false;
+      document.getElementById('gameOverMessage').style.display = 'none';
+      gameLoop();
+    }
+
     // Increase the interval between obstacles
-    setInterval(createObstacle, 3000); // Obstacles appear every 3 seconds now
+    setInterval(createObstacle, 2500); // Obstacles appear every 2.5 seconds now
 
     window.addEventListener("keydown", (e) => {
       if (e.code === "Space" || e.code === "ArrowUp") {
-        handleJump();
+        if (gameOver) {
+          resetGame(); // Restart game if it's over
+        } else {
+          handleJump(); // Jump if the game is still running
+        }
       }
     });
 
