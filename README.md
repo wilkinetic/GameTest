@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,6 +38,11 @@
     const catImage = new Image();
     catImage.src = 'https://placekitten.com/50/50'; // Placeholder kitten image, replace with your own URL if needed
 
+    // Ensure the game doesn't start until the image is fully loaded
+    catImage.onload = function() {
+      gameLoop();
+    };
+
     let player = {
       x: 50,
       y: canvas.height - 100,
@@ -46,7 +50,7 @@
       height: 50,
       dy: 0,
       gravity: 0.8,
-      jumpPower: 20,
+      jumpPower: -20, // Negative value to jump upward
       isJumping: false
     };
 
@@ -149,8 +153,6 @@
         handleJump();
       }
     });
-
-    gameLoop();
   </script>
 </body>
 </html>
