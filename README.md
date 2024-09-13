@@ -1,8 +1,9 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parkour Game with Cat Character</title>
+  <title>Parkour Game with Block Character</title>
   <style>
     body {
       margin: 0;
@@ -34,15 +35,7 @@
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Cat image for player
-    const catImage = new Image();
-    catImage.src = 'https://placekitten.com/50/50'; // Placeholder kitten image, replace with your own URL if needed
-
-    // Ensure the game doesn't start until the image is fully loaded
-    catImage.onload = function() {
-      gameLoop();
-    };
-
+    // Block character design
     let player = {
       x: 50,
       y: canvas.height - 100,
@@ -51,7 +44,8 @@
       dy: 0,
       gravity: 0.8,
       jumpPower: -20, // Negative value to jump upward
-      isJumping: false
+      isJumping: false,
+      color: "#f39c12", // Character color
     };
 
     let obstacles = [];
@@ -83,8 +77,18 @@
     }
 
     function drawPlayer() {
-      // Draw the cat image instead of a rectangle for the player
-      ctx.drawImage(catImage, player.x, player.y, player.width, player.height);
+      // Draw block character with face
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Add eyes
+      ctx.fillStyle = "#ffffff"; // White eyes
+      ctx.fillRect(player.x + 10, player.y + 10, 10, 10); // Left eye
+      ctx.fillRect(player.x + 30, player.y + 10, 10, 10); // Right eye
+
+      // Add mouth
+      ctx.fillStyle = "#000000"; // Black mouth
+      ctx.fillRect(player.x + 20, player.y + 30, 10, 5); // Mouth
     }
 
     function drawObstacles() {
@@ -153,6 +157,8 @@
         handleJump();
       }
     });
+
+    gameLoop();
   </script>
 </body>
 </html>
